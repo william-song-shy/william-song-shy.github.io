@@ -4,4 +4,4 @@ title: 关于
 permalink: /about/
 ---
 
-这是一个关于页面，请编辑about.md以介绍你的博客。
+本博客有Shy制作，使用[Loffer](https://github.com/FromEndWorld/LOFFER)模板
