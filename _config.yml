@@ -14,10 +14,10 @@ description: 一个蒟蒻的博客
 #
 
 # 你的博客logo图片URL，建议尺寸不超过300px × 300px
-avatar: https://cdn.luogu.org/upload/usericon/122079.png
+avatar: https://s2.ax1x.com/2019/07/24/eVG8JO.png
 
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
-favicon: https://cdn.luogu.org/upload/usericon/122079.png
+favicon: https://s2.ax1x.com/2019/07/24/eVG8JO.png
 # 菜单中的按钮
 navigation:
   - name: 首页
