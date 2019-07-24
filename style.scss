@@ -682,6 +682,7 @@ nav {
 
 .wrapper-footer-mobile {
   display: none;
+  font-family: "consolas";
   
   @include mobile {
     display: block;
