@@ -682,7 +682,6 @@ nav {
 
 .wrapper-footer-mobile {
   display: none;
-  font-family: "consolas";
   
   @include mobile {
     display: block;
@@ -695,6 +694,7 @@ nav {
 footer {
   padding: 20px 0;
   text-align: center;
+  font-family: "consolas";
 
   p {
     font-size: $small-font-size;
