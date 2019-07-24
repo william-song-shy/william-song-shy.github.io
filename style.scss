@@ -20,11 +20,14 @@ html {
 }
 
 body {
-  font-family: $base-font;
+  font-family: "consolas";
   color: $base-color;
   line-height: 1.7em;
 }
 
+code{
+  font-family: "consolas";
+}
 .container {
   margin: 0 auto;
   max-width: 1000px;
