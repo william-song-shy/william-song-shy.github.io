@@ -1,0 +1,233 @@
+---
+layout: post
+title: 欧拉函数
+date: 2019-07-26
+Author: shy
+categories:
+tags: [知识]
+comments: true
+toc: true
+---
+# 欧拉函数
+
+## 基础知识
+
+### 规定
+
+规定$a\bot b$指$a$与$b​$互质
+
+### 欧拉函数
+
+> 在数论，对正整数$n​$，欧拉函数是小于$n​$的正整数中与$n​$互质的数的数目（记做$φ(n)​$）（$φ(1)=1​$）。
+>
+> 摘自[百度百科 欧拉函数](<https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/1944850?fr=aladdin>)
+
+### 完全剩余系
+
+> 从模$n​$的每个剩余类(指按模$n​$余数分得的$n​$类数)中各取一个数，得到一个由$n​$个数组成的集合，叫做模$n​$的一个完全剩余系。
+
+### 欧拉函数通项式
+
+通式：$φ(n)=n\times \prod\limits_{i=1}^m(1-\dfrac {1}{p_i})$，其中$p_1, p_2\cdots p_m$为$n$的**不同的**所有**质因数**，$x$是不为$0$的整数。**[坑]**如
+$$
+\begin{align}
+18=&2\times 3^2\\
+φ(18)=&18\times (1-\dfrac 1 2)\times (1-\dfrac 1 3) \\
+=&18 \times \dfrac 1 2 \times \dfrac 2 3\\
+=&18 \times \dfrac 1 3\\
+=&6
+\end{align}
+$$
+虽然$3$在$18$的质因数中出现了两次，但在计算时只计算一次 。
+
+## 引理
+
+### $gcd(a,b)=gcd(a+kb,b)$
+
+#### 证明
+
+设集合$A​$为$a,b​$的所有公约数，集合$B​$为​$a+kb,b​$的所有公约数。在集合$A​$中任取一数$q​$
+
+则有$q|a,q|b​$，推得$a+kb\equiv 0+k\times 0\equiv 0\pmod q​$，也就是$q|a+kb​$，结合$q|b​$,$q​$是$B​$的一个元素，也就是$A​$是$B​$的子集。
+
+在集合$B​$中任取一数$p​$
+
+则有$p|a+kb,p|b$，推得$a\equiv a+kb-kb\equiv 0-p\times 0\equiv 0\pmod q$，也就是$p|a$，结合$p|b$,$p$是$A$的一个元素，也就是$B$是$A$的子集。
+
+由于$A$和$B$都是有穷集，推得$A=B$，也就是$a,b$和$a+kb,b$的公约数相同，那么它们的最大值也就是$gcd(a,b)$也应该与$gcd(a+kb,b)$相同。推得
+$$
+gcd(a,b)=gcd(a+kb,b)\tag 1
+$$
+
+
+### 模$n$的一个完全剩余系内与互质的数的数目=$φ(n)$
+
+#### 证明
+
+设一数$q(q<n)$，使得$q\bot n(gcd(q,n)=1)$,则有$mn+q(m$是任意正整数$)$在模$n$的一个完全剩余系内。
+
+据$(1),gcd(n,q)=gcd(mn+q,n)=1​$，也就是说$gcd(mn+q,n)=1​$，推得$mn+q\bot 1​$。只有$q\bot n​$是可以（且一定）对应模$n​$的一个完全剩余系内与$n​$互质的一个数，$q​$有$φ(n)​$个取值，推得模$n​$的一个完全剩余系内与互质的数的数目=$φ(n)\tag 2​$
+
+### $φ$是积性函数
+
+$n=p_1\times p_2 \qquad φ(n)=φ(p_1)\times φ(p_2)​$，即积的欧拉函数值等于欧拉函数值的积，也就是说欧拉函数是积性函数
+
+#### 证明
+
+做矩阵
+$$
+\begin{matrix}
+1&2&3&\cdots &r&\cdots &p_1\\
+p_1+1&p_1+2&p_1+3&\cdots &p_1+r&\cdots &2p_1\\
+2p_1+1&2p_1+2&2p_1+3&\cdots &2p_1+r&\cdots &3p_1\\
+\vdots&\vdots&\vdots&&\vdots&&\vdots&\\
+(p_2-1)p_1+1&(p_2-1)p_1+2&(p_2-1)p_1+3&\cdots &(p_2-1)p_1+r&\cdots &p_2p_1
+\end{matrix}
+$$
+则 $φ(n)​$是上述数字矩阵中与 $x ​$互质的数的个数（因为矩阵包含了$1-​$即n$1-p_1p_2​$中所有数），也就是与 $p_1p_2​$同时互质的数的个数（由于$p_1\bot  p_2​$互质）。$\tag 3​$
+
+根据$(1)$，由于$gcd(r,p_1)=gcd(kp_1+r,p_1)$所以所有$r\bot p_1$的列里所有$p_2$个数都与$p_1$互质，据$(2)$,共有$φ(p_1)$个$r$和符合要求的列。
+
+每个列都是$r,p_1+r,2p_1+r,\cdots ,(p_2-1)p_1+r$,而这些元素恰好构成模$p_2$完全剩余系，据$(2)$,其中有$φ(p_2)$个数与$p_2$互质，这些数与$p_1$也互质，据$(3)$也就是与$n$互质。
+
+那么跟$n$互质的数共有$φ(p_1)\times φ(p_2)$个，推得
+$$
+n=p_1\times p_2 \qquad φ(n)=φ(p_1)\times φ(p_2)
+$$
+同理，这可以向多维度推广，证得$φ​$是积性函数,也就是
+$$
+\begin{align}
+&n=p_1p_2p_3\cdots p_k\\
+&φ(n)=φ(p_1)φ(p_2)φ(p_3)\cdotsφ(p_k)\tag 3
+\end{align}
+$$
+证毕。
+
+### 第一种情况
+
+$n=1\qquad φ(n)=1​$
+
+#### 证明
+
+欧拉函数定义的一部分
+
+### 第二种情况
+
+$n=p\qquad φ(n)=n-1$，其中$p$是质数
+
+#### 证明
+
+如果小于$n$的某数$m$与$n$**不**互质，则$m$含有质因数$p$，则$m$至少为$1\times p=p$，而$p= n$，不符合要求。
+
+推得所有数都互质，共$n-1$个数
+$$
+φ(n)=n-1
+$$
+
+### 第三种情况
+
+$n=p^k\qquad φ(n)=p^k - p^{k-1}​$
+
+#### 证明
+
+在小于**等于**$n$的$p^k$个数中，只有含质因数$p$的**不**与$n$互质，因此使用排除法，排除$1p,2p,3p\cdots p^{k-1}\times p\qquad$(​$p^{k-1}\times p=p^k=n$)共$p^{k-1}$个含质因数$p$的数（包含$n​$）。这样排除了所有**不符合**要求的数，推得
+$$
+\begin{align}
+φ(n)=&p^k - p^{k-1}\\
+=&p^k\times (1-\dfrac {1}{p})\tag 4
+\end{align}
+$$
+### 第四种情况
+
+$n={p_1}^{k_1}{p_2}^{k_2}{p_3}^{k_3}\dots {p_m}^{k_m}\qquad φ(n)=n\times \prod\limits_{i=1}^m(1-\dfrac {1}{p_i})​$
+
+#### 证明
+
+据$(3)$
+$$
+φ(n)=φ({p_1}^{k_1})φ({p_2}^{k_12})φ({p_3}^{k_3})\cdots φ({p_m}^{k_m})
+$$
+据(4)
+$$
+φ(n)={p_1}^{k_1}(1-\dfrac 1 {p_1}){p_2}^{k_2}(1-\dfrac 1 {p_2}){p_3}^{k_3}(1-\dfrac 1 {p_3})\dots {p_m}^{k_m}(1-\dfrac 1 {p_m})
+$$
+移项
+$$
+φ(n)=\begin{matrix}\underbrace{{p_1}^{k_1}{p_2}^{k_2}{p_3}^{k_3}\dots {p_m}^{k_m}}\\n\end{matrix}(1-\dfrac 1 {p_1})(1-\dfrac 1 {p_2})(1-\dfrac 1 {p_3})\cdots(1-\dfrac 1 {p_m})
+$$
+合并前半部分
+$$
+φ(n)=n(1-\dfrac 1 {p_1})(1-\dfrac 1 {p_2})(1-\dfrac 1 {p_3})\cdots(1-\dfrac 1 {p_m})
+$$
+结合起来为
+$$
+φ(n)=n\times \prod\limits_{i=1}^m(1-\dfrac {1}{p_i})
+$$
+
+## 代码实现
+
+### 正解
+
+#### 思路
+
+通过循环得到所有**不同的**质因数，通过展开通项式计算。
+$$
+\begin{align}
+x&\times (1-\dfrac 1 p)\\
+=&x\times 1 -x\times p\\
+=&x-\dfrac x p\tag 5
+\end{align}
+$$
+复杂度最差$O(\sqrt nlgn)(n=2^k)$最好$O(\sqrt n)(\text{n is prime})$，详见注释
+
+#### 代码
+
+```cpp
+int euler(int n)
+{
+    if (n==1)	return 1;  //特判
+    int res=n,a=n;// res是结果，a用于操作
+    for(int i=2; i*i<=a; i++)  //枚举质因数循环，到sqrt n即可枚举除最大质因数外所有质因数
+    {
+        if(a%i==0)  //判断是否是因数
+        {
+            res-=res/i; //使用(5)计算
+            while(a%i==0)
+                a/=i;    //除掉所有这个质因数
+        }
+    }
+    if(a>1)    //判断是否除干净了
+        res-=res/a; //使用(5)计算最后的质因数
+    return res;
+}
+```
+
+### 暴力
+
+#### 思路
+
+根据定义，从$1$到$n$循环，计算有多少个与$n$互质的数，时间复杂度$O(nlgn)$,不够优。
+
+#### 代码
+
+```cpp
+int gcd(int a,int b) 
+{
+    if(b==0) 
+    	return a;
+    return gcd(b,a%b);
+}
+int eular (int n)
+{
+    int ans=0;
+    for (int i=1;i<=n;i++)
+    {
+        if (gcd(i,n)==1)
+        {
+            ans++;
+        }
+    }
+    return ans;
+}
+```
+
